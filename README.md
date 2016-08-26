@@ -1,6 +1,8 @@
 # eclipse-workspace-launcher
 A tiny launcher tool that is able to launch eclipse workspaces
 
+![Screenshot](/screenshot.png?raw=true "Screenshot")
+
 # How to configure
 The tool reads ~/.ecwsrc by default, which contains the configuration of the workspace. This can be changed by passing the "ecws.config" system property to the application.
 
@@ -18,3 +20,5 @@ The configuration file is in standard java properties format.
 # How to use
 
 I personally bound a key to launch this tool. Either select one of the configured Eclipse Workspaces to launch, or press ESC to exit.
+
+In the main window, number keys (1-9) can be used to quickly access (the first 9) workspaces. Buttons are numbered starting from top left.
