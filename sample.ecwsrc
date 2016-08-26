@@ -1,0 +1,33 @@
+# screen index from 0-N
+screen = 2
+
+# how many buttons in a single row?
+columns = 6
+
+# default to starting with -clean
+clean = false
+
+# single workspace entry
+Release-5_4_workspace = /ssd/workspaces/Release-5_4
+Release-5_4_eclipse = /ssd/eclipse/Release-5_4/eclipse
+Release-5_4_icon = /home/mduft/bin/icons/54.png
+
+Release-5_4-ide_workspace = /ssd/workspaces/Release-5_4-ide
+Release-5_4-ide_eclipse = /ssd/eclipse/Release-5_4/eclipse
+Release-5_4-ide_icon = /home/mduft/bin/icons/54ide.png
+
+Release-5_5_workspace = /ssd/workspaces/Release-5_5
+Release-5_5_eclipse = /ssd/eclipse/Release-5_5/eclipse
+Release-5_5_icon = /home/mduft/bin/icons/55.png
+
+Release-5_5-ide_workspace = /ssd/workspaces/Release-5_5-ide
+Release-5_5-ide_eclipse = /ssd/eclipse/Release-5_5/eclipse
+Release-5_5-ide_icon = /home/mduft/bin/icons/55ide.png
+
+Release-5_6_workspace = /ssd/workspaces/Release-5_6
+Release-5_6_eclipse = /ssd/eclipse/Release-5_6/eclipse
+Release-5_6_icon = /home/mduft/bin/icons/56.png
+
+Release-5_6-ide_workspace = /ssd/workspaces/Release-5_6-ide
+Release-5_6-ide_eclipse = /ssd/eclipse/Release-5_6/eclipse
+Release-5_6-ide_icon = /home/mduft/bin/icons/56ide.png
