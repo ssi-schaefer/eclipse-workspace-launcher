@@ -14,12 +14,14 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ContentDisplay;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Screen;
@@ -98,13 +100,22 @@ public class Launcher extends Application {
 		int column = 0;
 		int row = 0;
 		for(Map.Entry<String, Entry> entry : items.entrySet()) {
+			VBox btnBox = new VBox();
 			Button btn = new Button(entry.getKey());
+			btn.setGraphic(btnBox);
 			btn.setPrefSize(130, 130);
 			btn.setMnemonicParsing(false);
+			
+			int accelKeyCode = getAccelKeyCode(column, row, maxCols);
+			
+			if (accelNeeded(accelKeyCode) && Boolean.parseBoolean(p.getProperty("showAccelKeyNo", "true"))) {
+				btnBox.getChildren().add(new Label(String.valueOf(accelKeyCode)));
+			}
+			
 			if(entry.getValue().icon != null) {
 				File icon = new File(entry.getValue().icon);
 				Image image = new Image(icon.toURI().toString());
-				btn.setGraphic(new ImageView(image));
+				btnBox.getChildren().add(new ImageView(image));
 			}
 			btn.setContentDisplay(ContentDisplay.TOP);
 			
@@ -124,12 +135,14 @@ public class Launcher extends Application {
 				// exit
 				primaryStage.close();
 			});
-			scene.getAccelerators().put(new KeyCodeCombination(KeyCode.getKeyCode(Integer.toString(column + 1))), () -> {
-				btn.fire();
-			});
-			scene.getAccelerators().put(new KeyCodeCombination(KeyCode.getKeyCode("Numpad " + Integer.toString(column + 1))), () -> {
-				btn.fire();
-			});
+			if (accelNeeded(accelKeyCode)) {
+				scene.getAccelerators().put(new KeyCodeCombination(KeyCode.getKeyCode(Integer.toString(accelKeyCode))), () -> {
+					btn.fire();
+				});
+				scene.getAccelerators().put(new KeyCodeCombination(KeyCode.getKeyCode("Numpad " + Integer.toString(accelKeyCode))), () -> {
+					btn.fire();
+				});
+			}
 			
 			pane.add(btn, column++, row);
 			
@@ -165,6 +178,14 @@ public class Launcher extends Application {
 		pane.setStyle("-fx-background-color: white");
 		
 		primaryStage.show();
+	}
+	
+	private boolean accelNeeded(int keyCode) {
+		return (keyCode <= 9);
+	}
+	
+	private int getAccelKeyCode(int column, int row, int maxCols) {
+		return (row*maxCols + column + 1);
 	}
 
 }
