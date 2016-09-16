@@ -13,6 +13,7 @@ The configuration file is in standard java properties format.
 * `screen`: defines the screen number the dialog should appear on (0-N)
 * `columns`: how many workspaces should be displayed in a row
 * `clean`: should the "clean" checkbox be ticked by default
+* `showAccelKeyNo`: show accelerator key numbers on buttons if set
 * `<NAME>_workspace`: path to the workspace for button `<NAME>`
 * `<NAME>_eclipse`: path to eclipse executable to use for launching workspace `<NAME>`
 * `<NAME>_icon`: path to icon to use for workspace button `<NAME>`
