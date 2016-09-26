@@ -8,6 +8,7 @@ import java.util.Properties;
 import java.util.TreeMap;
 
 import javafx.application.Application;
+import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
@@ -165,7 +166,13 @@ public class Launcher extends Application {
 		scene.setFill(Color.TRANSPARENT);
 		
 		int screenIndex = Integer.parseInt(p.getProperty("screen", "0"));
-		Screen target = Screen.getScreens().get(screenIndex);
+		ObservableList<Screen> screens = Screen.getScreens();
+		Screen target;
+		if(screens.size() > screenIndex) {
+			target = screens.get(screenIndex);
+		} else {
+			target = screens.get(0);
+		}
 		
 		Rectangle2D screenBounds = target.getVisualBounds();
 		primaryStage.setX(screenBounds.getMinX() + (screenBounds.getWidth() - scene.getWidth()) / 2); 
