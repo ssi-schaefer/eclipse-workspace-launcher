@@ -9,18 +9,22 @@ import java.util.TreeMap;
 
 import javafx.application.Application;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.geometry.Point2D;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
+import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -98,6 +102,8 @@ public class Launcher extends Application {
 		int requiredRows = (items.size() + maxCols -1) / maxCols;
 		Scene scene = new Scene(pane, 5 + (requiredCols * 135), 30 + (requiredRows * 135));
 		
+		boolean fastToolTip = Boolean.parseBoolean(p.getProperty("fastToolTip", "false"));
+		
 		int column = 0;
 		int row = 0;
 		for(Map.Entry<String, Entry> entry : items.entrySet()) {
@@ -106,6 +112,27 @@ public class Launcher extends Application {
 			btn.setGraphic(btnBox);
 			btn.setPrefSize(130, 130);
 			btn.setMnemonicParsing(false);
+			
+			Tooltip tt = new Tooltip(entry.getKey());
+			if (fastToolTip) {
+				btn.setOnMouseEntered(new EventHandler<MouseEvent>() {
+
+					@Override
+					public void handle(MouseEvent event) {
+						Point2D p = btn.localToScreen(btn.getLayoutBounds().getMaxX(), btn.getLayoutBounds().getMaxY());
+						tt.show(btn, p.getX(), p.getY());
+					}
+				});
+				btn.setOnMouseExited(new EventHandler<MouseEvent>() {
+
+					@Override
+					public void handle(MouseEvent event) {
+						tt.hide();
+					}
+				});
+			} else {
+				btn.setTooltip(tt);
+			}
 			
 			int accelKeyCode = getAccelKeyCode(column, row, maxCols);
 			
