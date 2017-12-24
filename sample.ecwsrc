@@ -10,6 +10,9 @@ clean = false
 # show accelerator key no
 showAccelKeyNo = true
 
+# show toolTip immediately on MouseOver
+fastToolTip = true
+
 # single workspace entry
 Release-5_4_workspace = /ssd/workspaces/Release-5_4
 Release-5_4_eclipse = /ssd/eclipse/Release-5_4/eclipse
