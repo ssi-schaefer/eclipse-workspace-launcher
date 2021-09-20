@@ -7,6 +7,11 @@ columns = 6
 # default to starting with -clean
 clean = false
 
+# default FlightRecorder options
+flightRecorder = -XX:+FlightRecorder
+startFlightRecording = -XX:StartFlightRecording=dumponexit=true,filename=C:\\myrecording.jfr
+flightReorderOptions = -XX:FlightReorderOptions=stackdepth=1000
+
 # show accelerator key no
 showAccelKeyNo = true
 
